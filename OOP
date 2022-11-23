@@ -1,0 +1,73 @@
+OOP gerçekleşmesi için aşağıdaki 4 özelliğin gerçekleşmesi gerekir:
+Soyutlama (Abstraction)
+Sarmalama / Paketleme (Encapsulation)
+Miras Alma (Inheritance)
+Çok Biçimlilik (Polymorphism)
+
+Soyutlama (Abstraction)
+sistemin detaylarına odaklanmak yerine girdi ve çıktılarını bakmak sistemi daha iyi anlamıza olanak sağlar.
+Java dilinde soyutlama abstract class (soyut sınıflar) ve interface (arayüzler) aracılığıyla yapılır.
+Abstract sınıflar,genellikle ortak özellikleri olan nesneleri tek bir çatı altında toplamak için kullanılır.
+Abstract sınıflarda içi boş yada dolu metodlar tanımlanır.
+Abstract sınıflardan new kelimesi ile nesne oluşturulmaz.
+En az 1 abstract metod varsa sınıf abstract olmalıdır.
+
+public abstract class Machine {
+private int id;
+public int getId() {
+        return id;
+    }
+public void setId(int id) {
+        this.id = id;
+    }
+public abstract void start();
+    public abstract void doStaff();
+    public abstract void shutdown();
+public void run(){
+        start();
+        doStaff();
+        shutdown();
+    }
+}
+Bu örnekte Machine sınıfı oluşturuyoruz.
+Bu sınıfımıza abstract kelimesi ekleyerek somut sınıf olarak tanımlıyoruz.
+Bu sınıfımızın içindeyse start, doStaff, shutdown adlarında metotlar tanımlıyoruz.
+
+public class Car extends Machine {
+@Override
+    public void start() {
+System.out.println("Starting Car...");
+}
+@Override
+    public void doStaff() {
+System.out.println("Do stuff in car.");
+}
+@Override
+    public void shutdown() {
+System.out.println("Shutdown car.");
+}
+}
+Oluşturduğumuz Machine isimli soyut sınıfımızdan miras alan Car sınıfı oluşturuyoruz.
+Burada Machine sınıfını miras aldıkları için, süper sınıfta yer alan bu 3 metot gerçekleştirilir.
+Soyutlama ile ilgili örneğe buradan ulaşıp, mantığı daha iyi kavrayabilirsiniz.
+
+Arayüz gerçekleştirmesi için implements kelimesi kullanılır.
+Soyut sınıftan miras almak için extends kelimesi kullanılır.
+Arayüzlerdeki tüm metodlar hali hazırda soyut ve public erişim belirtecine sahiptir.
+Ayrıca abstract veya public kelimelerini deklare etmenize gerek yoktur.
+Arayüzlerdeki metodlar program kodu içermez. Bu sınıflarda sadece metod şablonları yer alır.
+Soyut sınıflarda soyut olmayan metodlar için uygulama kodu yazabilirsiniz.
+Arayüzlerdeki tüm metodlar, o arayüzü gerçekleştiren sınıflar tarafından geçersiz kılınarak(override) uygulanmalıdır.
+Soyut sınıflardan miras alan sınıflar, sadece soyut sınıftaki soyut metodlar için gerçekleştiren kodu yazmalıdır.
+Arayüzler yapıcı metodlar(constructor) içermez.Soyut sınıflar yapıcı metodlar içerebilir.Arayüzlerdeki metodlar static olamaz.
+Soyut sınıflarda soyut olmayan metodlar static olarak tanımlanabilir.
+
+Arayüzleri;
+Bir biriyle yakın ilişkisi olmayan / olmadığı halde arayüzünü geliştirecek sınıflar oluşturulmak istenildiğinde
+Sistem için belirli bir davranış belirlediğimiz durumlarda ama o davranışın ne gibi durumlarda elde edildiğini bir önemi olmadığı durumlarda
+Birden fazla sınıftan davranışları miras almak istediğimizde kullanabiliriz.
+
+Soyut Sınıfları;
+Bir biriyle ilişkisi olan sınıflar arasında kod paylaşımı yapmak istediğimizde
+Nesnelerin yaratıldığı sınıflardaki, static ve final türünde olmayan sınıf değişkenlerini manipüle ederek o sınıftan oluşturulan nesnelerin davranışlarını değiştirilmeyi sağlayan metodlar tanımlamak istediğimizde
+Soyut sınıftan miras alınan sınıfların bir çok ortak değişkeni veya metot içerebileceğini ve public erişim belirtecine sahip olmayan (private veya protected) metot veya değişkenler içerebileceğini öngördüğünüzde kullanabiliriz.
